@@ -10,21 +10,21 @@ const StyledGameLogo = styled.span`
   display: flex;
   justify-content: center;
   align-items: center;
-  opacity: ${props=>props.fade ? '0' : '1'};
+  opacity: ${(props) => (props.fade ? "0" : "1")};
   transition: opacity 0.5s ease-in-out;
 
-  img{
+  img {
     max-height: 1em;
     margin-right: 8px;
-    ${props=>props.usedInCard && 'position: relative; top: 4px;'}
+    ${(props) => props.usedInCard && "position: relative; top: 4px;"}
   }
 
   @media screen and (max-width: 1080px) {
-    ${props=>props.usedInCard && 'font-size: 2rem;'}
+    ${(props) => props.usedInCard && "font-size: 2rem;"}
   }
 
   @media screen and (max-width: 600px) {
-    ${props=>props.usedInCard ? 'font-size: 1.5rem;' : 'font-size: 2rem'};
+    ${(props) => (props.usedInCard ? "font-size: 1.5rem;" : "font-size: 2rem")};
   }
 
   @media (max-width: 393px) {
@@ -32,15 +32,14 @@ const StyledGameLogo = styled.span`
   }
 `;
 
-function GameLogo({noFade = false}) {
+function GameLogo({ noFade = false }) {
   const { activeIndex, gamesData } = useGames();
   const [fade, setFade] = useState(false);
   const [logoData, setLogoData] = useState(gamesData[activeIndex].logoData);
   const isFirstRender = useRef(true);
 
-  useEffect(()=>{
-    if (noFade)
-      setLogoData(gamesData[activeIndex].logoData)
+  useEffect(() => {
+    if (noFade) setLogoData(gamesData[activeIndex].logoData);
     if (isFirstRender.current || noFade) {
       isFirstRender.current = false;
       return;
@@ -55,12 +54,16 @@ function GameLogo({noFade = false}) {
 
     // Cleanup timeout if the component unmounts or activeIndex changes too quickly
     return () => clearTimeout(timeout);
-  },[gamesData, activeIndex, noFade])
+  }, [gamesData, activeIndex, noFade]);
 
   return (
-    <StyledGameLogo style={logoData.bold ? {fontWeight: 'bold'} : {}} fade={fade} usedInCard={noFade} >
-      {logoData.logo.startsWith("/") ? (
-          <img src={logoData.logo} />
+    <StyledGameLogo
+      style={logoData.bold ? { fontWeight: "bold" } : {}}
+      fade={fade}
+      usedInCard={noFade}
+    >
+      {logoData.logo.startsWith("/") || logoData.logo.startsWith("\\") ? (
+        <img src={logoData.logo} />
       ) : (
         <span>{logoData.logo}</span>
       )}

@@ -6,6 +6,7 @@ const StyledCard = styled.div`
   overflow: hidden;
   flex-shrink: 0;
   width: auto;
+  min-width: 626px;
   height: ${(props) => (props.$smol ? "85%" : "100%")};
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
   transition: height 1s ease;
@@ -14,7 +15,7 @@ const StyledCard = styled.div`
   z-index: 0;
 
   .mobile,
-  .emoji{
+  .emoji {
     display: none;
   }
 
@@ -94,40 +95,58 @@ const StyledCard = styled.div`
 
   @media screen and (max-width: 1366px) {
     height: ${(props) => (props.$smol ? "85%" : "100%")};
+    min-width: 521px;
   }
 
   @media screen and (max-width: 1080px) {
-    ${props=>props.$smol ? 'display: block' : 'display: block'};
+    ${(props) => (props.$smol ? "display: block" : "display: block")};
 
-    p{
+    p {
       font-size: 2rem;
     }
+
+    min-width: 417px;
+  }
+
+  @media screen and (max-width: 768px) {
+    min-width: 365px;
   }
 
   @media (max-width: 600px) {
-    img:first-of-type{
+    img:first-of-type {
       display: none;
     }
 
-    .mobile{
+    .mobile {
       display: block;
     }
 
-    p{
+    p {
       font-size: 1.7rem;
     }
 
     p span:not(.emoji) {
       display: none;
     }
+
+    min-width: 198px;
   }
 
   @media (max-width: 393px) {
-    
+    min-width: 181px;
   }
 `;
 
-function Card({ index, gamesData, smol, right, onMouseEnter, onMouseLeave, onClick, shift }) {
+function Card({
+  index,
+  gamesData,
+  smol,
+  right,
+  onMouseEnter,
+  onMouseLeave,
+  onClick,
+  shift,
+}) {
   const href = gamesData[index].href;
 
   return (
@@ -137,10 +156,24 @@ function Card({ index, gamesData, smol, right, onMouseEnter, onMouseLeave, onCli
       onMouseLeave={onMouseLeave}
       onClick={onClick}
     >
-      <a href={href} target="_blank" rel="noreferrer noopener" onClick={e=>{if (shift) e.preventDefault()}}>
+      <a
+        href={href}
+        target="_blank"
+        rel="noreferrer noopener"
+        onClick={(e) => {
+          if (shift) e.preventDefault();
+        }}
+      >
         <img src={gamesData[index].screenshot} alt={`Game ${index + 1}`} />
-        <img src={gamesData[index].screenshot_mobile} alt={`Game ${index + 1}`} className="mobile" />
-        <p>Play {<GameLogo noFade={true} />} now!<span className="emoji">👆</span></p>
+        <img
+          src={gamesData[index].screenshot_mobile}
+          alt={`Game ${index + 1}`}
+          className="mobile"
+        />
+        <p>
+          Play {<GameLogo noFade={true} />} now!
+          <span className="emoji">👆</span>
+        </p>
       </a>
       {smol && <Arrow right={right} />}
     </StyledCard>

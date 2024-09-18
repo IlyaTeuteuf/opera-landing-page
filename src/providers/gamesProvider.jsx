@@ -11,7 +11,7 @@ function GamesProvider({ children }) {
       screenshot_mobile: "/whentaken_mobile_ss.png",
       href: "https://whentaken.com/",
       logoData: {
-        logo: "/src/assets/whentaken_logo.svg",
+        logo: "\\src\\assets\\whentaken_logo.svg",
         bold: false,
         name: [
           { text: "When", style: { fontWeight: "bold" } },
