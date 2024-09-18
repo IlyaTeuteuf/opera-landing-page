@@ -29,7 +29,7 @@ function Logo() {
       target="_blank"
       rel="noreferrer noopener"
     >
-      <img src="\src\assets\teuteuf.svg" alt="Teuteuf Logo" />
+      <img src="/assets/teuteuf.svg" alt="Teuteuf Logo" />
     </StyledLogo>
   );
 }

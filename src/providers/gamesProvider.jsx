@@ -11,7 +11,7 @@ function GamesProvider({ children }) {
       screenshot_mobile: "/whentaken_mobile_ss.png",
       href: "https://whentaken.com/",
       logoData: {
-        logo: "\\src\\assets\\whentaken_logo.svg",
+        logo: "/assets/whentaken_logo.svg",
         bold: false,
         name: [
           { text: "When", style: { fontWeight: "bold" } },
@@ -29,8 +29,7 @@ function GamesProvider({ children }) {
       href: "https://www.geogridgame.com/",
       logoData: { logo: "🌎", bold: false, name: [{ text: "GeoGrid" }] },
       descriptionData: {
-        heading:
-          "Guess a country for each box in the grid by criterion",
+        heading: "Guess a country for each box in the grid by criterion",
         info: "Players have 10 guesses to fill out the grid, less common answers yield higher score. A country can only be used once per game board.",
       },
     },
@@ -48,8 +47,7 @@ function GamesProvider({ children }) {
         ],
       },
       descriptionData: {
-        heading:
-          "Guess the country by its' shape",
+        heading: "Guess the country by its' shape",
         info: "Test your visual memory by guessing the country by its' shape! Includes numerous bonus rounds, such as guessing the neighbours, capital, population, and others.",
       },
     },
@@ -63,9 +61,8 @@ function GamesProvider({ children }) {
         name: [{ text: "FLAG" }, { text: "LE", style: { color: "#1a76d2" } }],
       },
       descriptionData: {
-        heading:
-          'Guess which country does the flag belong to',
-        info: 'Think you know flags? Test your memory! Each guess reveals a tile, and bonus rounds add coat of arms and capital city flags. How fast can you guess? Let\'s play!',
+        heading: "Guess which country does the flag belong to",
+        info: "Think you know flags? Test your memory! Each guess reveals a tile, and bonus rounds add coat of arms and capital city flags. How fast can you guess? Let's play!",
       },
     },
   ];
