@@ -80,14 +80,14 @@ const StyledArrow = styled.div`
 function Arrow({ right, onClick }) {
   return (
     <StyledArrow $right={right} onClick={onClick}>
-      <svg
+       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
         fill="none"
         stroke="white"
         strokeWidth="2"
-        strokeLinecap="butt" // Changed to make the arrow not rounded
-        strokeLinejoin="miter" // Changed to make sharp corners
+        strokeLinecap="round"
+        strokeLinejoin="round"
       >
         <polyline points="15 18 9 12 15 6" />
       </svg>

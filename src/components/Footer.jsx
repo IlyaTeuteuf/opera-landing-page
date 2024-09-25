@@ -13,10 +13,14 @@ const StyledFooter = styled.footer`
   }
 
   @media screen and (max-width: 1198px) {
-    width: 100%;
-    padding: 0 1rem;
+    /* position: absolute;
+    bottom: 0;
+    right: 0;
     flex-direction: row-reverse;
-    justify-content: flex-start;
+    justify-content: flex-start; */
+    width: 100vw;
+    justify-content: flex-end;
+    padding-top: 10px;
 
     p{
       display: none;

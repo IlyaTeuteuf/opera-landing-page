@@ -18,6 +18,7 @@ const StyledScroller = styled.div`
     justify-content: center;
     align-items: center;
     gap: 16px;
+    transition: transform 0.2s;
   }
 
   &.animate .container {
@@ -43,7 +44,7 @@ const StyledScroller = styled.div`
     background-image: linear-gradient(
       to left,
       rgba(255, 255, 255, 0),
-      rgba(17, 26, 41, 1) 90%
+      rgba(33, 34, 59, 1) 90%
     );
     width: 10%;
     height: 85%;
@@ -59,7 +60,7 @@ const StyledScroller = styled.div`
     background-image: linear-gradient(
       to right,
       rgba(255, 255, 255, 0),
-      rgba(17, 26, 41, 1) 90%
+      rgba(33, 34, 59, 1) 90%
     );
     width: 10%;
     height: 85%;
@@ -84,42 +85,11 @@ const StyledScroller = styled.div`
   }
 
   @media screen and (max-width: 1536px) {
-    &:before {
-      background-image: linear-gradient(
-        to left,
-        rgba(255, 255, 255, 0),
-        rgba(21, 32, 50, 1) 90%
-      );
-    }
-
-    &:after {
-      background-image: linear-gradient(
-        to right,
-        rgba(255, 255, 255, 0),
-        rgba(21, 32, 50, 1) 90%
-      );
-    }
   }
 
   @media screen and (max-width: 1366px) {
     max-width: 1150px;
     height: 500px;
-
-    &:before {
-      background-image: linear-gradient(
-        to left,
-        rgba(255, 255, 255, 0),
-        rgba(20, 31, 48, 1) 90%
-      );
-    }
-
-    &:after {
-      background-image: linear-gradient(
-        to right,
-        rgba(255, 255, 255, 0),
-        rgba(20, 31, 48, 1) 90%
-      );
-    }
 
     @keyframes shiftRight {
       0% {
@@ -167,43 +137,11 @@ const StyledScroller = styled.div`
   @media screen and (max-width: 768px) {
     max-width: 720px;
     height: 350px;
-
-    &:before {
-      background-image: linear-gradient(
-        to left,
-        rgba(255, 255, 255, 0),
-        rgba(21, 33, 51, 1) 90%
-      );
-    }
-
-    &:after {
-      background-image: linear-gradient(
-        to right,
-        rgba(255, 255, 255, 0),
-        rgba(21, 33, 51, 1) 90%
-      );
-    }
   }
 
   @media screen and (max-width: 600px) {
     max-width: 83%;
     height: 480px;
-
-    &:before {
-      background-image: linear-gradient(
-        to left,
-        rgba(255, 255, 255, 0),
-        rgba(19, 30, 46, 1) 90%
-      );
-    }
-
-    &:after {
-      background-image: linear-gradient(
-        to right,
-        rgba(255, 255, 255, 0),
-        rgba(19, 30, 46, 1) 90%
-      );
-    }
 
     @keyframes shiftRight {
       0% {
@@ -225,25 +163,9 @@ const StyledScroller = styled.div`
   }
 
   @media screen and (max-width: 393px) {
-    margin-top: 60px;
+    margin-top: 30px;
     max-width: 90%;
-    height: 440px;
-
-    &:before {
-      background-image: linear-gradient(
-        to left,
-        rgba(255, 255, 255, 0),
-        rgba(20, 32, 49, 1) 90%
-      );
-    }
-
-    &:after {
-      background-image: linear-gradient(
-        to right,
-        rgba(255, 255, 255, 0),
-        rgba(20, 32, 49, 1) 90%
-      );
-    }
+    max-height: 440px;
 
     @keyframes shiftRight {
       0% {
@@ -279,6 +201,68 @@ const StyledScroller = styled.div`
     }
   }
 `;
+
+const StyledArrow = styled.div`
+  position: absolute;
+  top: 50%;
+  ${props=>props.right ? 'right: 0' : 'left: 0'};
+  z-index: 1;
+  width: 60px;
+  height: 100%;
+  color: white;
+  pointer-events: none;
+  display: none;
+  animation: ${props=>props.right ? 'moveRight' : 'moveLeft'} 2s linear infinite, fade 2s linear infinite;
+
+  ${props=>props.right && 'transform: scaleX(-100%)'};
+
+  svg{
+    transform: translateY(-50%);
+  }
+
+  @media (max-width: 393px) {
+    display: block;
+  }
+
+  @keyframes moveRight{
+    0%{
+      right: 0;
+    }
+    15%{
+      right: -4px;
+    }
+    100%{
+      right: -50px;
+    }
+  }
+
+  @keyframes moveLeft{
+    0%{
+      left: 0;
+    }
+    15%{
+      left: -4px;
+    }
+    100%{
+      left: -50px;
+    }
+  }
+
+  @keyframes fade{
+    0%{
+      opacity: 0;
+    }
+    15%{
+      opacity: 1;
+    }
+    75%{
+      opacity: 0;
+    }
+    100%{
+      opacity: 0;
+    }
+  }
+`
 
 function Scroller() {
   const { activeIndex, setActiveIndex, gamesData } = useGames();
@@ -353,7 +337,20 @@ function Scroller() {
   const [shift, setShift] = useState(null);
 
   return (
-    <StyledScroller shift={shift} className={` ${shift ? "animate" : ""}`}>
+    <StyledScroller shift={shift} className={` ${shift ? "animate" : ""}`}> 
+    <StyledArrow right={false}>
+      <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="white"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <polyline points="15 18 9 12 15 6" />
+        </svg>
+    </StyledArrow>
       <div className={`container`}>
         {indices.map((index, i) => (
           <Card
@@ -377,6 +374,19 @@ function Scroller() {
           />
         ))}
       </div>
+      <StyledArrow right={true}>
+      <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="white"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <polyline points="15 18 9 12 15 6" />
+        </svg>
+    </StyledArrow>
     </StyledScroller>
   );
 }

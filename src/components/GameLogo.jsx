@@ -20,7 +20,8 @@ const StyledGameLogo = styled.span`
   }
 
   @media screen and (max-width: 1080px) {
-    ${(props) => props.usedInCard && "font-size: 2rem;"}
+    ${(props) => props.usedInCard && "font-size: 2rem;"};
+    margin: 0 0 24px;
   }
 
   @media screen and (max-width: 600px) {
@@ -28,7 +29,7 @@ const StyledGameLogo = styled.span`
   }
 
   @media (max-width: 393px) {
-    margin: 24px 0;
+    margin: 0 0 24px;
   }
 `;
 

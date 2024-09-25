@@ -28,10 +28,10 @@ const InfoWrapper = styled.div`
     margin-top: 1rem;
   }
 
-  @media screen and (max-width: 600px){
-    margin-top: 2.5rem;
+  @media (max-width: 600px) {
+    margin-top: 2rem;
   }
-`
+`;
 
 function App() {
   return (

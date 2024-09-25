@@ -11,8 +11,7 @@ body {
     BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans,
     sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol,
     Noto Color Emoji;
-    background: linear-gradient(to right, transparent, black, transparent),
-    #162336;
+  background: #21223b;
 }
 
 #root {
@@ -21,4 +20,5 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  overflow: hidden;
 }

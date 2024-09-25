@@ -48,7 +48,7 @@ function GamesProvider({ children }) {
       },
       descriptionData: {
         heading: "Guess the country by its' shape",
-        info: "Test your visual memory by guessing the country by its' shape! Includes numerous bonus rounds, such as guessing the neighbours, capital, population, and others.",
+        info: "Test your visual memory by guessing the country by its shape! Includes numerous bonus rounds, such as guessing the neighbours, capital, population, and others.",
       },
     },
     {
@@ -62,7 +62,7 @@ function GamesProvider({ children }) {
       },
       descriptionData: {
         heading: "Guess which country does the flag belong to",
-        info: "Think you know flags? Test your memory! Each guess reveals a tile, and bonus rounds add coat of arms and capital city flags. How fast can you guess? Let's play!",
+        info: "Put your flag memory to a test! Each guess reveals a tile, and bonus rounds include coat of arms, capital city flags and others. Let's play!",
       },
     },
   ];
