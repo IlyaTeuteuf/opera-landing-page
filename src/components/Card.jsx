@@ -22,6 +22,8 @@ const StyledCard = styled.div`
     width: auto;
     height: 100%;
     transition: transform 0.5s ease;
+    object-fit: cover;
+    object-position: center;
   }
   
   &:hover img{
