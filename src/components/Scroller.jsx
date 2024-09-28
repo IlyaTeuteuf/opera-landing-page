@@ -111,7 +111,7 @@ const StyledScroller = styled.div`
 
     @keyframes shiftRight {
       0% {
-        transform: translateX(-432px);
+        transform: translateX(calc(-432px + ${props=>props.swipe}px));
       }
       100% {
         transform: translateX(0);
@@ -120,7 +120,7 @@ const StyledScroller = styled.div`
 
     @keyframes shiftLeft {
       0% {
-        transform: translateX(432px);
+        transform: translateX(calc(432px + ${props=>props.swipe}px));
       }
       100% {
         transform: translateX(0);
@@ -139,7 +139,8 @@ const StyledScroller = styled.div`
 
     @keyframes shiftRight {
       0% {
-        transform: translateX(-213.2px);
+        transform: translateX(calc(-213.2px + ${props=>props.swipe}px));
+
       }
       100% {
         transform: translateX(0);
@@ -148,7 +149,7 @@ const StyledScroller = styled.div`
 
     @keyframes shiftLeft {
       0% {
-        transform: translateX(213.2px);
+        transform: translateX(calc(213.2px + ${props=>props.swipe}px));
       }
       100% {
         transform: translateX(0);
