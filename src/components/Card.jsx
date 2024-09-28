@@ -163,6 +163,10 @@ function Card({
   onMouseLeave,
   onClick,
   shift,
+  // touch events
+  onTouchStart,
+  onTouchMove,
+  onTouchEnd,
 }) {
   const href = gamesData[index].href;
 
@@ -172,6 +176,9 @@ function Card({
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       onClick={onClick}
+      onTouchStart={onTouchStart}
+      onTouchMove={onTouchMove}
+      onTouchEnd={onTouchEnd}
     >
       <a
         href={href}

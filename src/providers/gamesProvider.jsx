@@ -7,33 +7,6 @@ function GamesProvider({ children }) {
 
   const gamesData = [
     {
-      screenshot: "/whentaken_ss.png",
-      screenshot_mobile: "/whentaken_mobile_ss.png",
-      href: "https://whentaken.com/",
-      logoData: {
-        logo: "/assets/whentaken_logo.svg",
-        bold: false,
-        name: [
-          { text: "When", style: { fontWeight: "bold" } },
-          { text: "Taken" },
-        ],
-      },
-      descriptionData: {
-        heading: `GUESS WHEN AND WHERE A PHOTO WAS TAKEN`,
-        info: "Test your detective skills with our daily game, check out the archive or create your own game in the Community section.",
-      },
-    },
-    {
-      screenshot: "/geogridgame_ss.png",
-      screenshot_mobile: "/geogridgame_mobile_ss.png",
-      href: "https://www.geogridgame.com/",
-      logoData: { logo: "🌎", bold: false, name: [{ text: "GeoGrid" }] },
-      descriptionData: {
-        heading: "Guess a country for each box in the grid by criterion",
-        info: "Players have 10 guesses to fill out the grid, less common answers yield higher score. A country can only be used once per game board.",
-      },
-    },
-    {
       screenshot: "/worldle_ss.png",
       screenshot_mobile: "/worldle_mobile_ss.png",
       href: "https://worldle.teuteuf.fr/",
@@ -52,6 +25,23 @@ function GamesProvider({ children }) {
       },
     },
     {
+      screenshot: "/whentaken_ss.png",
+      screenshot_mobile: "/whentaken_mobile_ss.png",
+      href: "https://whentaken.com/",
+      logoData: {
+        logo: "/assets/whentaken_logo.svg",
+        bold: false,
+        name: [
+          { text: "When", style: { fontWeight: "bold" } },
+          { text: "Taken" },
+        ],
+      },
+      descriptionData: {
+        heading: `GUESS WHEN AND WHERE A PHOTO WAS TAKEN`,
+        info: "Test your detective skills with our daily game, check out the archive or create your own game in the Community section.",
+      },
+    },
+    {
       screenshot: "/flagle_ss.png",
       screenshot_mobile: "/flagle_mobile_ss.png",
       href: "https://www.flagle.io/",
@@ -63,6 +53,16 @@ function GamesProvider({ children }) {
       descriptionData: {
         heading: "Guess which country does the flag belong to",
         info: "Put your flag memory to a test! Each guess reveals a tile, and bonus rounds include coat of arms, capital city flags and others. Let's play!",
+      },
+    },
+    {
+      screenshot: "/geogridgame_ss.png",
+      screenshot_mobile: "/geogridgame_mobile_ss.png",
+      href: "https://www.geogridgame.com/",
+      logoData: { logo: "🌎", bold: false, name: [{ text: "GeoGrid" }] },
+      descriptionData: {
+        heading: "Guess a country for each box in the grid by criterion",
+        info: "Players have 10 guesses to fill out the grid, less common answers yield higher score. A country can only be used once per game board.",
       },
     },
   ];
