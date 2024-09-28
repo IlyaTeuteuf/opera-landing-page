@@ -18,7 +18,6 @@ const StyledScroller = styled.div`
     justify-content: center;
     align-items: center;
     gap: 16px;
-    transition: transform 0.2s;
   }
 
   &.animate .container {
@@ -349,8 +348,8 @@ function Scroller() {
 
   const handleTouchEnd = () => {
     setIsPaused(false);
-    if (swipe > 80) handleIncrementIndex();
-    if (swipe < -80) handleDecrementIndex();
+    if (swipe > 80) handleDecrementIndex();
+    if (swipe < -80) handleIncrementIndex();
     startX.current = 0;
     setSwipe(0);
   }
