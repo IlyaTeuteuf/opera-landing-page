@@ -20,7 +20,7 @@ function GamesProvider({ children }) {
         ],
       },
       descriptionData: {
-        heading: "Guess the country by its' shape",
+        heading: "Guess the country by its shape",
         info: "Test your visual memory by guessing the country by its shape! Includes numerous bonus rounds, such as guessing the neighbours, capital, population, and others.",
       },
     },
@@ -51,7 +51,7 @@ function GamesProvider({ children }) {
         name: [{ text: "FLAG" }, { text: "LE", style: { color: "#1a76d2" } }],
       },
       descriptionData: {
-        heading: "Guess which country does the flag belong to",
+        heading: "Guess which country the flag belongs to",
         info: "Put your flag memory to a test! Each guess reveals a tile, and bonus rounds include coat of arms, capital city flags and others. Let's play!",
       },
     },

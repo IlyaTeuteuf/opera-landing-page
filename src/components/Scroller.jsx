@@ -63,6 +63,7 @@ const StyledScroller = styled.div`
   @keyframes shiftRight {
     0% {
       transform: translateX(-641px);
+
     }
     100% {
       transform: translateX(0);
@@ -111,7 +112,7 @@ const StyledScroller = styled.div`
 
     @keyframes shiftRight {
       0% {
-        transform: translateX(calc(-432px + ${props=>props.swipe}px));
+        transform: translateX(-432px);
       }
       100% {
         transform: translateX(0);
@@ -120,7 +121,7 @@ const StyledScroller = styled.div`
 
     @keyframes shiftLeft {
       0% {
-        transform: translateX(calc(432px + ${props=>props.swipe}px));
+        transform: translateX(432px);
       }
       100% {
         transform: translateX(0);
@@ -139,7 +140,7 @@ const StyledScroller = styled.div`
 
     @keyframes shiftRight {
       0% {
-        transform: translateX(calc(-213.2px + ${props=>props.swipe}px));
+        transform: translateX(-213.2px);
 
       }
       100% {
@@ -149,7 +150,8 @@ const StyledScroller = styled.div`
 
     @keyframes shiftLeft {
       0% {
-        transform: translateX(calc(213.2px + ${props=>props.swipe}px));
+        transform: translateX(213.2px);
+
       }
       100% {
         transform: translateX(0);
@@ -164,7 +166,7 @@ const StyledScroller = styled.div`
 
     @keyframes shiftRight {
       0% {
-        transform: translateX(calc(-196.7px + ${props=>props.swipe}px));
+        transform: translateX(-196.7px);
       }
       100% {
         transform: translateX(0);
@@ -173,7 +175,7 @@ const StyledScroller = styled.div`
 
     @keyframes shiftLeft {
       0% {
-        transform: translateX(calc(196.7px + ${props=>props.swipe}px));
+        transform: translateX(196.7px);
       }
       100% {
         transform: translateX(0);
@@ -334,6 +336,7 @@ function Scroller() {
   // Touch events
   const [swipe, setSwipe] = useState(0);
   const startX = useRef(0);
+  const containerRef = useRef(null);
 
   const handleTouchStart = (e) => {
     setIsPaused(true);
@@ -344,6 +347,9 @@ function Scroller() {
   const handleTouchMove = (e) => {
     if (!startX.current) return;
     const delta = e.touches[0].clientX - startX.current;
+    if (containerRef.current) {
+      containerRef.current.style.left = `${delta}px`;
+    }
     setSwipe(delta);
   }
 
@@ -351,12 +357,23 @@ function Scroller() {
     setIsPaused(false);
     if (swipe > 80) handleDecrementIndex();
     if (swipe < -80) handleIncrementIndex();
+    
+    if (containerRef.current) {
+      containerRef.current.style.transition = 'all 1s ease'
+      containerRef.current.style.left = '0';
+
+      setTimeout(()=>{
+        containerRef.current.style.transition = '';
+      },1000)
+    }
+
     startX.current = 0;
     setSwipe(0);
   }
 
+
   return (
-    <StyledScroller shift={shift} swipe={swipe} className={` ${shift ? "animate" : ""}`}> 
+    <StyledScroller shift={shift} swipe={swipe} className={` ${shift ? "animate" : ""}`} > 
     <StyledArrow right={false}>
       <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -370,7 +387,7 @@ function Scroller() {
           <polyline points="15 18 9 12 15 6" />
         </svg>
     </StyledArrow>
-      <div className={`container`}  style={{transform: `translateX(${swipe}px)`}}>
+      <div className={`container`} >
         {indices.map((index, i) => (
           <Card
             key={keys.current[i]}
