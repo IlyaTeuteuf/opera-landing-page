@@ -24,6 +24,8 @@ const StyledCard = styled.div`
     transition: transform 0.5s ease;
     object-fit: cover;
     object-position: center;
+    user-select: none;
+
   }
   
   &:hover img{
@@ -116,8 +118,21 @@ const StyledCard = styled.div`
     height: ${(props) => (props.$smol ? "85%" : "100%")};
     min-width: 521px;
   }
+  @media screen and (max-height: 900px) {
+    height: ${(props) => (props.$smol ? "85%" : "100%")};
+    min-width: 521px;
+  }
 
   @media screen and (max-width: 1080px) {
+    ${(props) => (props.$smol ? "display: block" : "display: block")};
+
+    p {
+      font-size: 2rem;
+    }
+
+    min-width: 417px;
+  }
+  @media screen and (max-height: 800px) {
     ${(props) => (props.$smol ? "display: block" : "display: block")};
 
     p {

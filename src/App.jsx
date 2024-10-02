@@ -6,7 +6,7 @@ import Footer from "./components/Footer";
 import styled from "styled-components";
 
 const InfoWrapper = styled.div`
-  margin: 0 auto auto;
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;

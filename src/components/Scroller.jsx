@@ -20,9 +20,19 @@ const StyledScroller = styled.div`
     gap: 16px;
   }
 
-  &.animate .container {
+  /* &.animate .container {
     animation: ${(props) =>
-        props.shift === "left" ? "shiftLeft" : "shiftRight"}
+    props.shift === "left" ? "shiftLeft" : "shiftRight"}
+      1s ease;
+  } */
+  &.animate .container {
+    animation: ${(props) => {
+        if (props.swipe) {
+          return props.shift === "left" ? "shiftLeftSwipe" : "shiftRightSwipe";
+        } else {
+          return props.shift === "left" ? "shiftLeft" : "shiftRight";
+        }
+      }}
       1s ease;
   }
 
@@ -63,7 +73,6 @@ const StyledScroller = styled.div`
   @keyframes shiftRight {
     0% {
       transform: translateX(-641px);
-
     }
     100% {
       transform: translateX(0);
@@ -79,10 +88,29 @@ const StyledScroller = styled.div`
     }
   }
 
-  @media screen and (max-width: 1536px) {
-  }
-
   @media screen and (max-width: 1366px) {
+    max-width: 1150px;
+    height: 500px;
+
+    @keyframes shiftRight {
+      0% {
+        transform: translateX(-536px);
+      }
+      100% {
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes shiftLeft {
+      0% {
+        transform: translateX(536px);
+      }
+      100% {
+        transform: translateX(0);
+      }
+    }
+  }
+  @media screen and (max-height: 900px) {
     max-width: 1150px;
     height: 500px;
 
@@ -128,6 +156,29 @@ const StyledScroller = styled.div`
       }
     }
   }
+  @media screen and (max-height: 800px) {
+    margin-top: 70px;
+    max-width: 900px;
+    height: 400px;
+
+    @keyframes shiftRight {
+      0% {
+        transform: translateX(-432px);
+      }
+      100% {
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes shiftLeft {
+      0% {
+        transform: translateX(432px);
+      }
+      100% {
+        transform: translateX(0);
+      }
+    }
+  }
 
   @media screen and (max-width: 768px) {
     max-width: 720px;
@@ -141,7 +192,6 @@ const StyledScroller = styled.div`
     @keyframes shiftRight {
       0% {
         transform: translateX(-213.2px);
-
       }
       100% {
         transform: translateX(0);
@@ -151,7 +201,6 @@ const StyledScroller = styled.div`
     @keyframes shiftLeft {
       0% {
         transform: translateX(213.2px);
-
       }
       100% {
         transform: translateX(0);
@@ -172,10 +221,26 @@ const StyledScroller = styled.div`
         transform: translateX(0);
       }
     }
+    @keyframes shiftRightSwipe {
+      0% {
+        transform: translateX(calc(-196.7px + ${(props) => props.swipe}px));
+      }
+      100% {
+        transform: translateX(0);
+      }
+    }
 
     @keyframes shiftLeft {
       0% {
         transform: translateX(196.7px);
+      }
+      100% {
+        transform: translateX(0);
+      }
+    }
+    @keyframes shiftLeftSwipe {
+      0% {
+        transform: translateX(calc(196.7px + ${(props) => props.swipe}px));
       }
       100% {
         transform: translateX(0);
@@ -202,18 +267,20 @@ const StyledScroller = styled.div`
 const StyledArrow = styled.div`
   position: absolute;
   top: 50%;
-  ${props=>props.right ? 'right: 0' : 'left: 0'};
+  ${(props) => (props.right ? "right: 0" : "left: 0")};
   z-index: 1;
   width: 60px;
   height: 100%;
   color: white;
   pointer-events: none;
   display: none;
-  animation: ${props=>props.right ? 'moveRight' : 'moveLeft'} 2s linear infinite, fade 2s linear infinite;
+  animation: ${(props) => (props.right ? "moveRight" : "moveLeft")} 2s linear
+      infinite,
+    fade 2s linear infinite;
 
-  ${props=>props.right && 'transform: scaleX(-100%)'};
+  ${(props) => props.right && "transform: scaleX(-100%)"};
 
-  svg{
+  svg {
     transform: translateY(-50%);
   }
 
@@ -221,45 +288,45 @@ const StyledArrow = styled.div`
     display: block;
   }
 
-  @keyframes moveRight{
-    0%{
+  @keyframes moveRight {
+    0% {
       right: 0;
     }
-    15%{
+    15% {
       right: -4px;
     }
-    100%{
+    100% {
       right: -50px;
     }
   }
 
-  @keyframes moveLeft{
-    0%{
+  @keyframes moveLeft {
+    0% {
       left: 0;
     }
-    15%{
+    15% {
       left: -4px;
     }
-    100%{
+    100% {
       left: -50px;
     }
   }
 
-  @keyframes fade{
-    0%{
+  @keyframes fade {
+    0% {
       opacity: 0;
     }
-    15%{
+    15% {
       opacity: 1;
     }
-    75%{
+    75% {
       opacity: 0;
     }
-    100%{
+    100% {
       opacity: 0;
     }
   }
-`
+`;
 
 function Scroller() {
   const { activeIndex, setActiveIndex, gamesData } = useGames();
@@ -341,41 +408,40 @@ function Scroller() {
   const handleTouchStart = (e) => {
     setIsPaused(true);
     startX.current = e.touches[0].clientX;
-
-  }
+  };
 
   const handleTouchMove = (e) => {
     if (!startX.current) return;
     const delta = e.touches[0].clientX - startX.current;
-    if (containerRef.current) {
-      containerRef.current.style.left = `${delta}px`;
-    }
     setSwipe(delta);
-  }
+    if (containerRef) {
+      containerRef.current.style.transform = `translateX(${delta}px)`;
+    }
+  };
 
   const handleTouchEnd = () => {
     setIsPaused(false);
     if (swipe > 80) handleDecrementIndex();
     if (swipe < -80) handleIncrementIndex();
-    
-    if (containerRef.current) {
-      containerRef.current.style.transition = 'all 1s ease'
-      containerRef.current.style.left = '0';
-
-      setTimeout(()=>{
-        containerRef.current.style.transition = '';
-      },1000)
-    }
 
     startX.current = 0;
-    setSwipe(0);
-  }
+    if (containerRef) {
+      containerRef.current.style.transform = `translateX(${0}px)`;
+    }
 
+    setTimeout(() => {
+      setSwipe(0);
+    }, 1000);
+  };
 
   return (
-    <StyledScroller shift={shift} swipe={swipe} className={` ${shift ? "animate" : ""}`} > 
-    <StyledArrow right={false}>
-      <svg
+    <StyledScroller
+      shift={shift}
+      swipe={swipe}
+      className={` ${shift ? "animate" : ""}`}
+    >
+      <StyledArrow right={false}>
+        <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           fill="none"
@@ -386,8 +452,8 @@ function Scroller() {
         >
           <polyline points="15 18 9 12 15 6" />
         </svg>
-    </StyledArrow>
-      <div className={`container`} >
+      </StyledArrow>
+      <div className={`container`} ref={containerRef}>
         {indices.map((index, i) => (
           <Card
             key={keys.current[i]}
@@ -408,14 +474,14 @@ function Scroller() {
             }
             shift={shift}
             // touch events
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
+            onTouchStart={i === 2 ? handleTouchStart : null}
+            onTouchMove={i === 2 ? handleTouchMove : null}
+            onTouchEnd={i === 2 ? handleTouchEnd : null}
           />
         ))}
       </div>
       <StyledArrow right={true}>
-      <svg
+        <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           fill="none"
@@ -426,7 +492,7 @@ function Scroller() {
         >
           <polyline points="15 18 9 12 15 6" />
         </svg>
-    </StyledArrow>
+      </StyledArrow>
     </StyledScroller>
   );
 }

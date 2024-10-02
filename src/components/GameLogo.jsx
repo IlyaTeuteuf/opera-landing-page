@@ -3,7 +3,8 @@ import { useGames } from "../providers/gamesProvider";
 import { useEffect, useRef, useState } from "react";
 
 const StyledGameLogo = styled.span`
-  margin: 32px 0;
+  padding-top: 8px;
+  margin: 0 0 32px;
   color: white;
   text-align: center;
   font-size: 2.5rem;
